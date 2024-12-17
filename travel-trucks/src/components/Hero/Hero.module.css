@@ -1,0 +1,62 @@
+.heroBox {
+  position: relative; /* Додано для того, щоб забезпечити можливість накладання напівпрозорого шару */
+  background: url("../../../src/assets/images/background-picture-min.jpg");
+  background-position: center;
+  width: 100%;
+  height: 696px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heroBox::before {
+  content: ""; /* Псевдоелемент для накладання чорного шару */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); /* Напівпрозорий чорний фон */
+  z-index: 1; /* Псевдоелемент буде знаходитися поверх фону, але під текстом */
+}
+
+.infoBox {
+  padding-left: 64px;
+  z-index: 2; /* Забезпечує, що вміст всередині infoBox буде вище за псевдоелемент */
+  position: relative;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 0.66667;
+  color: #f7f7f7;
+  margin-bottom: 16px;
+}
+
+.text {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33333;
+  color: #f7f7f7;
+  margin-bottom: 40px;
+}
+
+.btn {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #fff;
+  background: #e44848;
+  border-radius: 200px;
+  width: 173px;
+  height: 56px;
+  border: none;
+  text-align: center;
+}
+
+.btn:focus,
+.btn:hover {
+  background-color: #d84343;
+}

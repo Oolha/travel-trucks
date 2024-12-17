@@ -1,0 +1,9 @@
+.logoBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  width: 136px;
+  height: 16px;
+}
