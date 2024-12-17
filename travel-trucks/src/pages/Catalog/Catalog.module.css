@@ -2,3 +2,10 @@
   background-color: #f7f7f7;
   border-bottom: 1px solid #f2f4f7;
 }
+.mainBox {
+  display: flex;
+  flex-direction: row;
+  gap: 64px;
+  padding: 0 64px;
+  margin-top: 47px;
+}

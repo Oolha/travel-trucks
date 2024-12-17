@@ -1,0 +1,73 @@
+.camperItem {
+  border: 1px solid #dadde1;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+.imgBox {
+  width: 292px;
+}
+.img {
+  border-radius: 10px;
+  width: 292px;
+  height: 320px;
+  object-fit: cover;
+  object-position: 85% 60%;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+}
+.nameAndPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.priceBox {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+}
+.name,
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33333;
+  color: #101828;
+}
+.priceBox {
+  display: flex;
+  align-items: center;
+}
+.ratingAndLocation {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #101828;
+  margin-top: 8px;
+}
+.descr {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #475467;
+  margin-top: 24px;
+  width: 500px;
+}
+.btn {
+  background: transparent;
+  border: none;
+}
+.icon {
+  width: 25px;
+  height: 22px;
+}
