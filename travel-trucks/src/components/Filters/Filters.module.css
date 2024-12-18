@@ -8,11 +8,30 @@
   line-height: 1.5;
   color: #6c717b;
 }
-.inputLocation {
+.inputContainer {
   border-radius: 12px;
   padding: 18px 218px 18px 20px;
   background: #f7f7f7;
   margin-top: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.inputLocation {
+  border: none;
+  background-color: inherit;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #101828;
+}
+.inputLocation::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #6c717b;
 }
 .filters {
   font-weight: 500;
@@ -26,4 +45,26 @@
   font-size: 20px;
   line-height: 1.2;
   color: #101828;
+  margin-top: 38px;
+}
+.line {
+  stroke-width: 1px;
+  width: 360px;
+  height: 2px;
+  margin-top: 24px;
+}
+.optionLabel {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #101828;
+  margin: 0;
+}
+.equipments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 24px;
 }

@@ -1,76 +1,91 @@
 import { useState } from "react";
-import { useAppDispatch } from "../../redux/hooks";
-import {
-  fetchCampers,
-  fetchFilteredCampers,
-} from "../../redux/trucks/operations";
+import EquipmentCard from "../EquipmentCard/EquipmentCard";
 import css from "./Filters.module.css";
-const Filters = () => {
-  const dispatch = useAppDispatch();
+import { Icon } from "../Icon/Icon";
 
-  const [location, setLocation] = useState("");
-  const [form, setForm] = useState("");
-  const [AC, setAC] = useState(false);
-  const [kitchen, setKitchen] = useState(false);
+interface FilterParams {
+  location: string;
+  AC: boolean;
+  transmission: string;
+  kitchen: boolean;
+  TV: boolean;
+  bathroom: boolean;
+}
+const equipmentOptions = [
+  { id: "AC", label: "AC" },
+  { id: "automatic", label: "Automatic" },
+  { id: "kitchen", label: "Kitchen" },
+  { id: "TV", label: "TV" },
+  { id: "bathroom", label: "Bathroom" },
+];
 
-  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLocation(e.target.value);
+interface FiltersProps {
+  onSearch: (filters: FilterParams) => void;
+}
+
+const Filters: React.FC<FiltersProps> = ({ onSearch }) => {
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [location, setLocation] = useState<string>("");
+
+  const handleSelect = (id: string) => {
+    setSelectedFilters((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
   };
-
-  const handleFormChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setForm(e.target.value);
+  const handleSearch = () => {
+    const filters: FilterParams = {
+      location,
+      AC: selectedFilters.includes("AC"),
+      transmission: selectedFilters.includes("automatic") ? "automatic" : "",
+      kitchen: selectedFilters.includes("kitchen"),
+      TV: selectedFilters.includes("TV"),
+      bathroom: selectedFilters.includes("bathroom"),
+    };
+    onSearch(filters);
   };
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    if (name === "AC") setAC(checked);
-    if (name === "kitchen") setKitchen(checked);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const filterParams = { location, form, AC, kitchen };
-    dispatch(fetchFilteredCampers(filterParams));
-  };
-
+  const iconColor = location ? "#101828" : "#6c717b";
   return (
-    <form onSubmit={handleSubmit} className={css.form}>
+    <div>
       <p className={css.text}>Location</p>
-      <input
-        type="text"
-        placeholder="Kyiv, Ukraine"
-        value={location}
-        onChange={handleLocationChange}
-        className={css.inputLocation}
-      />
+      <div className={css.inputContainer}>
+        <Icon
+          id="map"
+          className={css.inputIcon}
+          size={20}
+          style={{ fill: iconColor }}
+        />
+        <input
+          type="text"
+          placeholder="City"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className={css.inputLocation}
+        />
+      </div>
       <p className={css.filters}>Filters</p>
-      <h3 className={css.title}> Vehicle equipment</h3>
-      <select value={form} onChange={handleFormChange}>
-        <option value="">Select Body Type</option>
-        <option value="alcove">Alcove</option>
-        <option value="integrated">Fully Integrated</option>
-        <option value="van">Van</option>
-      </select>
-      <label>
-        <input
-          type="checkbox"
-          name="AC"
-          checked={AC}
-          onChange={handleCheckboxChange}
-        />
-        Air Conditioning
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          name="kitchen"
-          checked={kitchen}
-          onChange={handleCheckboxChange}
-        />
-        Kitchen
-      </label>
-      <button type="submit">Search</button>
-    </form>
+      <h3 className={css.title}>Vehicle equipment</h3>
+      <Icon id="line" className={css.line} />
+      <div className={css.equipments}>
+        {equipmentOptions.map((option) => (
+          <EquipmentCard
+            key={option.id}
+            id={option.id}
+            label={<span className={css.optionLabel}>{option.label}</span>}
+            icon={<Icon id={option.id} size={32} />}
+            onSelect={handleSelect}
+            selected={selectedFilters.includes(option.id)}
+          />
+        ))}
+      </div>
+
+      {/* Кнопка для пошуку */}
+      <button
+        onClick={handleSearch}
+        style={{ marginTop: "20px", padding: "10px 20px" }}
+      >
+        Search
+      </button>
+    </div>
   );
 };
 

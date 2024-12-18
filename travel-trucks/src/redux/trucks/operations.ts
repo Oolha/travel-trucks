@@ -22,7 +22,15 @@ export const fetchCampers = createAsyncThunk<
 
 export const fetchFilteredCampers = createAsyncThunk<
   Camper[],
-  { location: string; form: string; AC: boolean; kitchen: boolean },
+  {
+    location?: string;
+    form?: string;
+    AC?: boolean;
+    transmission?: string;
+    kitchen?: boolean;
+    TV?: boolean;
+    bathroom?: boolean;
+  },
   { rejectValue: string }
 >("camper/fetchFilteredCampers", async (filterParams, thunkAPI) => {
   const BASE_URL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
@@ -32,8 +40,12 @@ export const fetchFilteredCampers = createAsyncThunk<
   const params: { [key: string]: string | boolean } = {};
   if (filterParams.location) params.location = filterParams.location;
   if (filterParams.form) params.form = filterParams.form;
-  if (filterParams.AC !== undefined) params.AC = filterParams.AC;
-  if (filterParams.kitchen !== undefined) params.kitchen = filterParams.kitchen;
+  if (filterParams.AC) params.AC = filterParams.AC;
+  if (filterParams.transmission)
+    params.transmission = filterParams.transmission;
+  if (filterParams.kitchen) params.kitchen = filterParams.kitchen;
+  if (filterParams.TV) params.TV = filterParams.TV;
+  if (filterParams.bathroom) params.bathroom = filterParams.bathroom;
 
   try {
     const response = await axios.get(url, { params });
