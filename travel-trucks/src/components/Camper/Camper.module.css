@@ -30,6 +30,12 @@
   flex-direction: row;
   gap: 14px;
 }
+.name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 350px;
+  overflow: hidden;
+}
 .name,
 .price {
   font-weight: 600;
@@ -66,10 +72,16 @@
 .btn {
   background: transparent;
   border: none;
+  transition: color 0.3s;
 }
+.btnFavorite {
+  fill: #e44848;
+}
+
 .icon {
   width: 25px;
   height: 22px;
+  fill: #101828;
 }
 .equipment {
   display: flex;
@@ -95,4 +107,18 @@
 .infoContainer {
   display: flex;
   flex-direction: column;
+}
+.showMore {
+  border-radius: 200px;
+  width: 166px;
+  height: 56px;
+  background: #e44848;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #fff;
+  border: none;
+  margin-top: auto;
+  align-self: flex-start;
 }

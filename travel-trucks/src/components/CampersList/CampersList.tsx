@@ -18,6 +18,7 @@ interface FilterParams {
   kitchen: boolean;
   TV: boolean;
   bathroom: boolean;
+  vehicleType: string;
 }
 
 interface CampersListProps {
@@ -51,6 +52,9 @@ const CampersList: React.FC<CampersListProps> = ({ filters }) => {
     const matchesKitchen = filters.kitchen ? camper.kitchen : true;
     const matchesTV = filters.TV ? camper.TV : true;
     const matchesBathroom = filters.bathroom ? camper.bathroom : true;
+    const matchesVehicleType = filters.vehicleType
+      ? camper.form === filters.vehicleType // Замінили vehicleType на form
+      : true;
 
     return (
       matchesLocation &&
@@ -58,7 +62,8 @@ const CampersList: React.FC<CampersListProps> = ({ filters }) => {
       matchesTransmission &&
       matchesKitchen &&
       matchesTV &&
-      matchesBathroom
+      matchesBathroom &&
+      matchesVehicleType
     );
   });
 

@@ -70,6 +70,9 @@ const Filters: React.FC<FiltersProps> = ({ onSearch }) => {
     }
 
     onSearch(filters);
+    setSelectedFilters([]);
+    setSelectedVehicleType("");
+    setLocation("");
   };
   const iconColor = location ? "#101828" : "#6c717b";
 

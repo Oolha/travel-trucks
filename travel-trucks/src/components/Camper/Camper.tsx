@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { addToFavorites } from "../../redux/favorites/slice";
 import { Camper as CamperType } from "../../redux/types";
 import { Icon } from "../Icon/Icon";
@@ -10,9 +11,11 @@ interface CamperProps {
 
 const Camper = ({ camper }: CamperProps) => {
   const [country, city] = camper.location.split(", ");
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const handleAddToFavorites = () => {
     dispatch(addToFavorites(camper));
+    setIsFavorite(true);
   };
   const dispatch = useDispatch();
   return (
@@ -31,7 +34,10 @@ const Camper = ({ camper }: CamperProps) => {
 
             <div className={css.priceBox}>
               <p className={css.price}>€{camper.price}</p>
-              <button onClick={handleAddToFavorites} className={css.btn}>
+              <button
+                onClick={handleAddToFavorites}
+                className={`${css.btn} ${isFavorite ? css.btnFavorite : ""}`}
+              >
                 <Icon id="heart" className={css.icon} />
               </button>
             </div>
@@ -86,6 +92,7 @@ const Camper = ({ camper }: CamperProps) => {
             </div>
           )}
         </div>
+        <button className={css.showMore}>Show more</button>
       </div>
     </div>
   );

@@ -12,20 +12,28 @@ interface FilterParams {
   kitchen: boolean;
   TV: boolean;
   bathroom: boolean;
+  vehicleType: string;
 }
+const defaultFilters: FilterParams = {
+  location: "",
+  AC: false,
+  transmission: "",
+  kitchen: false,
+  TV: false,
+  bathroom: false,
+  vehicleType: "",
+};
 
 const Catalog = ({}) => {
-  const [filters, setFilters] = useState<FilterParams>({
-    location: "",
-    AC: false,
-    transmission: "",
-    kitchen: false,
-    TV: false,
-    bathroom: false,
-  });
+  const [filters, setFilters] = useState<FilterParams>(defaultFilters);
+  const [resetResults, setResetResults] = useState<boolean>(false);
 
   const handleSearch = (newFilters: FilterParams) => {
-    setFilters(newFilters);
+    setResetResults(true);
+    setTimeout(() => {
+      setFilters(newFilters);
+      setResetResults(false);
+    }, 0);
   };
   return (
     <div>
@@ -35,7 +43,7 @@ const Catalog = ({}) => {
       <div className={css.mainBox}>
         <Filters onSearch={handleSearch} />
         <FavoritesPersistence />
-        <CampersList filters={filters} />
+        {!resetResults && <CampersList filters={filters} />}
       </div>
     </div>
   );
