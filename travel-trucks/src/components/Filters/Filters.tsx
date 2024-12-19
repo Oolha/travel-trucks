@@ -10,6 +10,7 @@ interface FilterParams {
   kitchen: boolean;
   TV: boolean;
   bathroom: boolean;
+  vehicleType: string;
 }
 const equipmentOptions = [
   { id: "AC", label: "AC" },
@@ -18,19 +19,27 @@ const equipmentOptions = [
   { id: "TV", label: "TV" },
   { id: "bathroom", label: "Bathroom" },
 ];
-
+const vehicleTypeOptions = [
+  { id: "van", label: "Van" },
+  { id: "fullyIntegrated", label: "Fully Integrated" },
+  { id: "alcove", label: "Alcove" },
+];
 interface FiltersProps {
   onSearch: (filters: FilterParams) => void;
 }
 
 const Filters: React.FC<FiltersProps> = ({ onSearch }) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [selectedVehicleType, setSelectedVehicleType] = useState<string>("");
   const [location, setLocation] = useState<string>("");
 
   const handleSelect = (id: string) => {
     setSelectedFilters((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
+  };
+  const handleVehicleTypeSelect = (id: string) => {
+    setSelectedVehicleType((prev) => (prev === id ? "" : id));
   };
   const handleSearch = () => {
     const filters: FilterParams = {
@@ -40,6 +49,7 @@ const Filters: React.FC<FiltersProps> = ({ onSearch }) => {
       kitchen: selectedFilters.includes("kitchen"),
       TV: selectedFilters.includes("TV"),
       bathroom: selectedFilters.includes("bathroom"),
+      vehicleType: selectedVehicleType,
     };
     onSearch(filters);
   };
@@ -77,12 +87,23 @@ const Filters: React.FC<FiltersProps> = ({ onSearch }) => {
           />
         ))}
       </div>
+      <h3 className={css.title}>Vehicle Type</h3>
+      <Icon id="line" className={css.line} />
+      <div className={css.equipments}>
+        {vehicleTypeOptions.map((option) => (
+          <EquipmentCard
+            key={option.id}
+            id={option.id}
+            label={<span className={css.optionLabel}>{option.label}</span>}
+            icon={<Icon id={option.id} size={32} />}
+            onSelect={handleVehicleTypeSelect}
+            selected={selectedVehicleType === option.id}
+            className={option.id === "fullyIntegrated" ? css.noPadding : ""}
+          />
+        ))}
+      </div>
 
-      {/* Кнопка для пошуку */}
-      <button
-        onClick={handleSearch}
-        style={{ marginTop: "20px", padding: "10px 20px" }}
-      >
+      <button onClick={handleSearch} className={css.btn}>
         Search
       </button>
     </div>

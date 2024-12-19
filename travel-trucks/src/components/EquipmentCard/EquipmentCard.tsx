@@ -6,6 +6,7 @@ interface EquipmentCardProps {
   icon: React.ReactNode;
   onSelect: (id: string) => void;
   selected: boolean;
+  className?: string;
 }
 
 const EquipmentCard: React.FC<EquipmentCardProps> = ({
@@ -14,14 +15,15 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
   icon,
   onSelect,
   selected,
+  className = "",
 }) => {
   return (
     <div
-      onClick={() => onSelect(id)}
       style={{
         border: selected ? "1px solid #e44848" : "1px solid #dadde1",
       }}
-      className={css.item}
+      className={`${css.item} ${selected ? css.selected : ""} ${className}`}
+      onClick={() => onSelect(id)}
     >
       {icon}
       <span>{label}</span>
