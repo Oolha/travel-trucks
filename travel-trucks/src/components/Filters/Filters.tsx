@@ -2,6 +2,7 @@ import { useState } from "react";
 import EquipmentCard from "../EquipmentCard/EquipmentCard";
 import css from "./Filters.module.css";
 import { Icon } from "../Icon/Icon";
+import { notification } from "antd";
 
 interface FilterParams {
   location: string;
@@ -51,9 +52,27 @@ const Filters: React.FC<FiltersProps> = ({ onSearch }) => {
       bathroom: selectedFilters.includes("bathroom"),
       vehicleType: selectedVehicleType,
     };
+    const hasFiltersApplied =
+      location ||
+      filters.AC ||
+      filters.transmission ||
+      filters.kitchen ||
+      filters.TV ||
+      filters.bathroom ||
+      filters.vehicleType;
+
+    if (!hasFiltersApplied) {
+      notification.warning({
+        message: "No Results Found",
+        description: "Please adjust your filters and try again.",
+        placement: "topRight",
+      });
+    }
+
     onSearch(filters);
   };
   const iconColor = location ? "#101828" : "#6c717b";
+
   return (
     <div>
       <p className={css.text}>Location</p>
@@ -102,7 +121,6 @@ const Filters: React.FC<FiltersProps> = ({ onSearch }) => {
           />
         ))}
       </div>
-
       <button onClick={handleSearch} className={css.btn}>
         Search
       </button>

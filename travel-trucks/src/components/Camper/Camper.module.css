@@ -71,3 +71,28 @@
   width: 25px;
   height: 22px;
 }
+.equipment {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 391px;
+  margin-top: 24px;
+}
+.equipmentItem {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  border-radius: 100px;
+  padding: 12px 18px;
+  background: #f2f4f7;
+  align-items: center;
+  justify-content: center;
+}
+.equipmentIcon {
+  width: 20px;
+  height: 20px;
+}
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+}

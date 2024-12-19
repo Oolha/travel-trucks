@@ -69,7 +69,7 @@ const CampersList: React.FC<CampersListProps> = ({ filters }) => {
       {!isLoading && !error && filteredCampers.length === 0 && (
         <p>No campers found.</p>
       )}
-      <ul>
+      <ul className={css.list}>
         {filteredCampers.map((camper) => {
           return (
             <li key={camper.id}>
