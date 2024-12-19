@@ -1,10 +1,14 @@
-import style from './OneCamper.module.css';
-import {useState} from 'react';
+import Header from "../../components/Header/Header";
+import style from "./OneCamper.module.css";
+import { useState } from "react";
+import css from "./OneCamper.module.css";
 
 const OneCamper = ({}) => {
   return (
     <div>
-      OneCamper
+      <div className={css.header}>
+        <Header />
+      </div>
     </div>
   );
 };

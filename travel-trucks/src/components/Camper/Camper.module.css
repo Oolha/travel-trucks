@@ -19,6 +19,7 @@
 .info {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 .nameAndPrice {
   display: flex;
@@ -104,9 +105,15 @@
   width: 20px;
   height: 20px;
 }
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .infoContainer {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .showMore {
   border-radius: 200px;
