@@ -4,13 +4,17 @@ import { Camper as CamperType } from "../../redux/types";
 import { Icon } from "../Icon/Icon";
 import css from "./Camper.module.css";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface CamperProps {
   camper: CamperType;
 }
 
 const Camper = ({ camper }: CamperProps) => {
+  const navigate = useNavigate();
+  const handleClick = (id: string) => {
+    navigate(`/catalog/${id}`);
+  };
   const [country, city] = camper.location.split(", ");
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -95,9 +99,14 @@ const Camper = ({ camper }: CamperProps) => {
             )}
           </div>
         </div>
-        <Link to={`/catalog/${camper.id}`}>
-          <button className={css.showMore}>Show more</button>
-        </Link>
+        <button
+          className={css.showMore}
+          onClick={() => {
+            handleClick(camper.id);
+          }}
+        >
+          Show more
+        </button>
       </div>
     </div>
   );

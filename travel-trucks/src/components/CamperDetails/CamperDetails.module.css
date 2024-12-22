@@ -1,0 +1,60 @@
+.img {
+  border-radius: 10px;
+  width: 292px;
+  height: 312px;
+  object-fit: cover;
+}
+.nameAndPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.priceBox {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+}
+.name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 350px;
+  overflow: hidden;
+}
+.name,
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33333;
+  color: #101828;
+}
+.price {
+  margin-top: 16px;
+}
+.priceBox {
+  display: flex;
+  align-items: center;
+}
+.ratingAndLocation {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #101828;
+  margin-top: 15px;
+}
+.gallery {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  width: 100%;
+}
+.descr {
+  max-width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #475467;
+  margin-top: 28px;
+}

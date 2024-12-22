@@ -1,3 +1,13 @@
 .header {
   background-color: #f7f7f7;
 }
+.camperDetails {
+  padding: 0 64px;
+  margin-top: 48px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-top: 60px;
+}

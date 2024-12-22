@@ -1,0 +1,27 @@
+.tabs {
+  margin-bottom: 42px;
+}
+
+.tab {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.tab:hover {
+  color: gray;
+}
+
+.active {
+  color: red;
+  border-bottom: 2px solid red;
+}
+
+.content {
+  margin-top: 20px;
+}
