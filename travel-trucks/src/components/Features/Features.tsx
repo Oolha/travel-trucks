@@ -79,7 +79,7 @@ const Features: React.FC<FeaturesProps> = ({ camper }) => {
         )}
       </div>
       <div>
-        <h3>Vehicle details</h3>
+        <h3 className={css.title}>Vehicle details</h3>
         <Icon id="bigLine" className={css.line} />
         <div className={css.features}>
           <div className={css.featuresBox}>

@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCampers } from "../../redux/trucks/selectors";
 import { Icon } from "../Icon/Icon";
+import CampervanForm from "../CampervanForm/CampervanForm";
 
 const FeaturesAndReviews = ({}) => {
   const { id } = useParams(); // Отримуємо ID кемпера з URL
@@ -35,10 +36,13 @@ const FeaturesAndReviews = ({}) => {
           Reviews
         </button>
       </div>
-      <Icon id="features-line" />
-      <div className={css.content}>
-        {activeTab === "features" && <Features camper={camper} />}
-        {activeTab === "reviews" && <Reviews />}
+      <Icon id="features-line" className={css.icon} />
+      <div className={css.container}>
+        <div className={css.content}>
+          {activeTab === "features" && <Features camper={camper} />}
+          {activeTab === "reviews" && <Reviews />}
+        </div>
+        <CampervanForm />
       </div>
     </div>
   );

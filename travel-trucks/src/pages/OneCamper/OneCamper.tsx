@@ -14,10 +14,7 @@ const OneCamper = ({}) => {
       </div>
       <div className={css.camperDetails}>
         <CamperDetails />
-        <div className={css.container}>
-          <FeaturesAndReviews />
-          <CampervanForm />
-        </div>
+        <FeaturesAndReviews />
       </div>
     </div>
   );

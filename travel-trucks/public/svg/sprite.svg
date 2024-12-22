@@ -125,7 +125,7 @@
 <symbol id="bigLine" width="527" height="2" viewBox="0 0 527 2" fill="none" >
   <path d="M0 1H527" stroke="#DADDE1" />
 </symbol>
-<symbol id="features-line" width="1312" height="2" viewBox="0 0 1312 2" fill="none" >
+<symbol id="features-line" viewBox="0 0 1312 2" fill="none" >
   <path d="M0 1H1312" stroke="#DADDE1" />
 </symbol>
 </defs>

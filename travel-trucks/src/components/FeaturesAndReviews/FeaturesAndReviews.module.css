@@ -22,6 +22,13 @@
   border-bottom: 2px solid red;
 }
 
-.content {
-  margin-top: 20px;
+.icon {
+  width: 1312px;
+  height: 2px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-top: 42px;
 }
