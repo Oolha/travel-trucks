@@ -35,8 +35,8 @@ const FeaturesAndReviews = ({}) => {
         >
           Reviews
         </button>
+        <div className={css.icon}></div>
       </div>
-      <Icon id="features-line" className={css.icon} />
       <div className={css.container}>
         <div className={css.content}>
           {activeTab === "features" && <Features camper={camper} />}

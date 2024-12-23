@@ -79,9 +79,11 @@ const CampervanForm: React.FC<CampervanFormProps> = () => {
           className={css.comment}
         />
         {messages.comment && <p className={css.message}>{messages.comment}</p>}
-        <button type="submit" className={css.btn}>
-          Send
-        </button>
+        <div className={css.btnBox}>
+          <button type="submit" className={css.btn}>
+            Send
+          </button>
+        </div>
       </form>
     </div>
   );

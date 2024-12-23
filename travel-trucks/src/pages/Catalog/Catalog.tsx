@@ -1,5 +1,4 @@
 import CampersList from "../../components/CampersList/CampersList";
-import FavoritesPersistence from "../../components/FavoritesPersistence/FavoritesPersistence";
 import Filters from "../../components/Filters/Filters";
 import Header from "../../components/Header/Header";
 import css from "./Catalog.module.css";
@@ -42,7 +41,6 @@ const Catalog = ({}) => {
       </div>
       <div className={css.mainBox}>
         <Filters onSearch={handleSearch} />
-        <FavoritesPersistence />
         {!resetResults && <CampersList filters={filters} />}
       </div>
     </div>

@@ -9,6 +9,7 @@ import {
   selectIsLoading,
 } from "../../redux/trucks/selectors";
 import { fetchCampers } from "../../redux/trucks/operations";
+import { Icon } from "../Icon/Icon";
 
 const CamperDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -52,9 +53,11 @@ const CamperDetails: React.FC = () => {
         <h3 className={css.name}>{camper.name}</h3>
       </div>
       <div className={css.ratingAndLocation}>
-        <p>
+        <Icon id="star" size={16} className={css.star} />
+        <p className={css.rating}>
           {camper.rating} ({camper.reviews.length} Reviews)
         </p>
+        <Icon id="map" className={css.iconMap} size={16} />
         <p>
           {city}, {country}
         </p>

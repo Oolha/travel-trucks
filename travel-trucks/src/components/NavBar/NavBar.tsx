@@ -13,7 +13,11 @@ const NavBar = ({}) => {
       </NavLink>
       <NavLink
         to="/catalog"
-        className={({ isActive }) => (isActive ? css.activeLink : css.navLink)}
+        className={({ isActive }) =>
+          isActive && window.location.pathname === "/catalog"
+            ? css.activeLink
+            : css.navLink
+        }
       >
         Catalog
       </NavLink>

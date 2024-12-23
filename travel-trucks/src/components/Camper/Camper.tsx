@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { addToFavorites } from "../../redux/favorites/slice";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../redux/favorites/slice";
 import { Camper as CamperType } from "../../redux/types";
 import { Icon } from "../Icon/Icon";
 import css from "./Camper.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 interface CamperProps {
@@ -11,16 +14,21 @@ interface CamperProps {
 }
 
 const Camper = ({ camper }: CamperProps) => {
+  const favorites = useSelector((state: any) => state.favorites);
   const navigate = useNavigate();
   const handleClick = (id: string) => {
     navigate(`/catalog/${id}`);
   };
   const [country, city] = camper.location.split(", ");
-  const [isFavorite, setIsFavorite] = useState(false);
+
+  const isFavorite = favorites.some((fav: CamperType) => fav.id === camper.id);
 
   const handleAddToFavorites = () => {
-    dispatch(addToFavorites(camper));
-    setIsFavorite(true);
+    if (isFavorite) {
+      dispatch(removeFromFavorites({ id: camper.id }));
+    } else {
+      dispatch(addToFavorites(camper));
+    }
   };
   const dispatch = useDispatch();
   return (
@@ -44,15 +52,20 @@ const Camper = ({ camper }: CamperProps) => {
                   onClick={handleAddToFavorites}
                   className={`${css.btn} ${isFavorite ? css.btnFavorite : ""}`}
                 >
-                  <Icon id="heart" className={css.icon} />
+                  <Icon
+                    id={isFavorite ? "redHeart" : "heart"}
+                    className={css.icon}
+                  />
                 </button>
               </div>
             </div>
 
             <div className={css.ratingAndLocation}>
-              <p>
+              <Icon id="star" size={16} className={css.star} />
+              <p className={css.reviews}>
                 {camper.rating}({camper.reviews.length} Reviews)
               </p>
+              <Icon id="map" className={css.iconMap} size={16} />
               <p>
                 {city}, {country}
               </p>
