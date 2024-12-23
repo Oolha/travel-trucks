@@ -3,3 +3,26 @@
   flex-direction: column;
   gap: 32px;
 }
+.loadMoreBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+.loadMore {
+  border: 1px solid #dadde1;
+  border-radius: 200px;
+  padding: 16px 32px;
+  width: 145px;
+  height: 56px;
+  background-color: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #101828;
+}
+.loadMore:focus,
+.loadMore:hover {
+  border: 1px solid #d84343;
+}

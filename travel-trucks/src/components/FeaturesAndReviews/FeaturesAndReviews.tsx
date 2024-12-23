@@ -10,19 +10,18 @@ import { Icon } from "../Icon/Icon";
 import CampervanForm from "../CampervanForm/CampervanForm";
 
 const FeaturesAndReviews = ({}) => {
-  const { id } = useParams(); // Отримуємо ID кемпера з URL
-  const campers = useSelector(selectCampers); // Дістаємо список кемперів з Redux
+  const { id } = useParams();
+  const campers = useSelector(selectCampers);
   const camper = campers.find((camper) => camper.id === id);
   const [activeTab, setActiveTab] = useState<"features" | "reviews">(
     "features"
   );
   if (!camper) {
-    return <p>Camper not found</p>; // Обробка випадку, якщо кемпер не знайдений
+    return <p>Camper not found</p>;
   }
   return (
     <div>
       <div className={css.tabs}>
-        {/* Перемикачі */}
         <button
           className={clsx(css.tab, { [css.active]: activeTab === "features" })}
           onClick={() => setActiveTab("features")}

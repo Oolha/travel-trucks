@@ -35,7 +35,7 @@ const Catalog = ({}) => {
     }, 0);
   };
   return (
-    <div>
+    <div className={css.catalogBox}>
       <div className={css.header}>
         <Header />
       </div>

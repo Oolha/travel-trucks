@@ -10,6 +10,7 @@ import {
 } from "../../redux/trucks/selectors";
 import { fetchCampers } from "../../redux/trucks/operations";
 import { Icon } from "../Icon/Icon";
+import Loader from "../Loader/Loader";
 
 const CamperDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -33,7 +34,7 @@ const CamperDetails: React.FC = () => {
   const camper = campers.find((camper) => camper.id === id);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (error) {

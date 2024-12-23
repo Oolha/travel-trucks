@@ -7,7 +7,7 @@ import { Camper as CamperType } from "../../redux/types";
 import { Icon } from "../Icon/Icon";
 import css from "./Camper.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface CamperProps {
   camper: CamperType;

@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { fetchCampers } from "../../redux/trucks/operations";
 import Camper from "../Camper/Camper";
 import { Camper as CamperType } from "../../redux/types";
+import Loader from "../Loader/Loader";
 
 interface FilterParams {
   location: string;
@@ -24,11 +25,17 @@ interface FilterParams {
 interface CampersListProps {
   filters: FilterParams;
 }
+
+const ITEMS_PER_PAGE = 4;
+
 const CampersList: React.FC<CampersListProps> = ({ filters }) => {
   const dispatch = useAppDispatch();
   const campers = useSelector(selectCampers);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
+
+  const [visibleCampers, setVisibleCampers] = useState<CamperType[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,48 +48,62 @@ const CampersList: React.FC<CampersListProps> = ({ filters }) => {
 
     fetchData();
   }, [dispatch]);
-  const filteredCampers = campers.filter((camper: CamperType) => {
-    const matchesLocation = filters.location
-      ? camper.location.toLowerCase().includes(filters.location.toLowerCase())
-      : true;
-    const matchesAC = filters.AC ? camper.AC : true;
-    const matchesTransmission = filters.transmission
-      ? camper.transmission === filters.transmission
-      : true;
-    const matchesKitchen = filters.kitchen ? camper.kitchen : true;
-    const matchesTV = filters.TV ? camper.TV : true;
-    const matchesBathroom = filters.bathroom ? camper.bathroom : true;
-    const matchesVehicleType = filters.vehicleType
-      ? camper.form === filters.vehicleType // Замінили vehicleType на form
-      : true;
 
-    return (
-      matchesLocation &&
-      matchesAC &&
-      matchesTransmission &&
-      matchesKitchen &&
-      matchesTV &&
-      matchesBathroom &&
-      matchesVehicleType
-    );
-  });
+  useEffect(() => {
+    const filteredCampers = campers.filter((camper: CamperType) => {
+      const matchesLocation = filters.location
+        ? camper.location.toLowerCase().includes(filters.location.toLowerCase())
+        : true;
+      const matchesAC = filters.AC ? camper.AC : true;
+      const matchesTransmission = filters.transmission
+        ? camper.transmission === filters.transmission
+        : true;
+      const matchesKitchen = filters.kitchen ? camper.kitchen : true;
+      const matchesTV = filters.TV ? camper.TV : true;
+      const matchesBathroom = filters.bathroom ? camper.bathroom : true;
+      const matchesVehicleType = filters.vehicleType
+        ? camper.form === filters.vehicleType
+        : true;
+
+      return (
+        matchesLocation &&
+        matchesAC &&
+        matchesTransmission &&
+        matchesKitchen &&
+        matchesTV &&
+        matchesBathroom &&
+        matchesVehicleType
+      );
+    });
+
+    setVisibleCampers(filteredCampers.slice(0, currentPage * ITEMS_PER_PAGE));
+  }, [campers, filters, currentPage]);
+
+  const handleLoadMore = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <div>
-      {isLoading && <p>Loading campers...</p>}
+      {isLoading && <Loader />}
       {error && <p className={css.error}>Error: {error}</p>}
-      {!isLoading && !error && filteredCampers.length === 0 && (
+      {!isLoading && !error && visibleCampers.length === 0 && (
         <p>No campers found.</p>
       )}
       <ul className={css.list}>
-        {filteredCampers.map((camper) => {
-          return (
-            <li key={camper.id}>
-              <Camper camper={camper} />
-            </li>
-          );
-        })}
+        {visibleCampers.map((camper) => (
+          <li key={camper.id}>
+            <Camper camper={camper} />
+          </li>
+        ))}
       </ul>
+      {visibleCampers.length < campers.length && (
+        <div className={css.loadMoreBox}>
+          <button className={css.loadMore} onClick={handleLoadMore}>
+            Load more
+          </button>
+        </div>
+      )}
     </div>
   );
 };
