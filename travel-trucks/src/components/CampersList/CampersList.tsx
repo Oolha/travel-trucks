@@ -35,6 +35,7 @@ const CampersList: React.FC<CampersListProps> = ({ filters }) => {
   const error = useSelector(selectError);
 
   const [visibleCampers, setVisibleCampers] = useState<CamperType[]>([]);
+  const [filteredCampers, setFilteredCampers] = useState<CamperType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -50,7 +51,8 @@ const CampersList: React.FC<CampersListProps> = ({ filters }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    const filteredCampers = campers.filter((camper: CamperType) => {
+    // Фільтруємо кемпери на основі обраних фільтрів
+    const filtered = campers.filter((camper: CamperType) => {
       const matchesLocation = filters.location
         ? camper.location.toLowerCase().includes(filters.location.toLowerCase())
         : true;
@@ -76,12 +78,22 @@ const CampersList: React.FC<CampersListProps> = ({ filters }) => {
       );
     });
 
-    setVisibleCampers(filteredCampers.slice(0, currentPage * ITEMS_PER_PAGE));
-  }, [campers, filters, currentPage]);
+    setFilteredCampers(filtered);
+    setCurrentPage(1); // Скидаємо сторінку при зміні фільтрів
+  }, [campers, filters]);
+
+  useEffect(() => {
+    // Відображаємо кемпери по сторінках
+    const startIndex = 0;
+    const endIndex = currentPage * ITEMS_PER_PAGE;
+    setVisibleCampers(filteredCampers.slice(startIndex, endIndex));
+  }, [filteredCampers, currentPage]);
 
   const handleLoadMore = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
+
+  const hasMoreCampers = visibleCampers.length < filteredCampers.length;
 
   return (
     <div>
@@ -97,7 +109,7 @@ const CampersList: React.FC<CampersListProps> = ({ filters }) => {
           </li>
         ))}
       </ul>
-      {visibleCampers.length < campers.length && (
+      {hasMoreCampers && (
         <div className={css.loadMoreBox}>
           <button className={css.loadMore} onClick={handleLoadMore}>
             Load more

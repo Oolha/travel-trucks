@@ -1,8 +1,9 @@
 [build]
-  base = "travel-trucks"
+base = "travel-trucks"
   publish = "dist"
   command = "npm run build"
 
-[dev]
-  command = "npm run dev"   
-  port = 3000  
+[[redirects]]
+  from = "/travel-trucks/*"
+  to = "/travel-trucks/index.html"
+  status = 200
