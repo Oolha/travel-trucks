@@ -1,6 +1,6 @@
 .heroBox {
-  position: relative; /* Додано для того, щоб забезпечити можливість накладання напівпрозорого шару */
-  background: url("../../../src/assets/images/background-picture-min.jpg");
+  position: relative;
+  background: url("../../../../travel-trucks/src/assets/images/background-picture-min.jpg");
   background-position: center;
   width: 100%;
   height: 696px;
@@ -10,19 +10,19 @@
 }
 
 .heroBox::before {
-  content: ""; /* Псевдоелемент для накладання чорного шару */
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.2); /* Напівпрозорий чорний фон */
-  z-index: 1; /* Псевдоелемент буде знаходитися поверх фону, але під текстом */
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .infoBox {
   padding-left: 64px;
-  z-index: 2; /* Забезпечує, що вміст всередині infoBox буде вище за псевдоелемент */
+  z-index: 2;
   position: relative;
 }
 
