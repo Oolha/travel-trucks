@@ -1,6 +1,6 @@
 [build]
-  base = "/travel-trucks/"
-  publish = "dist"
+  base = "travel-trucks" 
+  publish = "travel-trucks/dist"
   command = "npm run build"
 
 [[redirects]]
