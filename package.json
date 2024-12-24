@@ -1,7 +1,6 @@
 {
   "name": "travel-trucks",
   "private": true,
-  "homepage": "/travel-trucks",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

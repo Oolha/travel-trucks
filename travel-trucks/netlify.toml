@@ -1,9 +1,0 @@
-[build]
-base = "travel-trucks"
-  publish = "dist"
-  command = "npm run build"
-
-[[redirects]]
-  from = "/travel-trucks/*"
-  to = "/travel-trucks/index.html"
-  status = 200
