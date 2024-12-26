@@ -11,7 +11,7 @@ interface FilterParams {
   kitchen: boolean;
   TV: boolean;
   bathroom: boolean;
-  vehicleType: string;
+  form: string;
 }
 const defaultFilters: FilterParams = {
   location: "",
@@ -20,7 +20,7 @@ const defaultFilters: FilterParams = {
   kitchen: false,
   TV: false,
   bathroom: false,
-  vehicleType: "",
+  form: "",
 };
 
 const Catalog = ({}) => {

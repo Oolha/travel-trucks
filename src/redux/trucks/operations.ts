@@ -13,7 +13,7 @@ export const fetchCampers = createAsyncThunk<
 
   try {
     const response = await axios.get(url);
-    return response.data.items; // Повертаємо всі продукти
+    return response.data.items;
   } catch (e) {
     const axiosError = e as AxiosError;
     return thunkAPI.rejectWithValue(axiosError.message);
@@ -30,6 +30,8 @@ export const fetchFilteredCampers = createAsyncThunk<
     kitchen?: boolean;
     TV?: boolean;
     bathroom?: boolean;
+    page?: number;
+    limit?: number;
   },
   { rejectValue: string }
 >("camper/fetchFilteredCampers", async (filterParams, thunkAPI) => {
@@ -37,7 +39,8 @@ export const fetchFilteredCampers = createAsyncThunk<
   const END_POINT = "/campers";
   const url = `${BASE_URL}${END_POINT}`;
 
-  const params: { [key: string]: string | boolean } = {};
+  const params: { [key: string]: string | number | boolean } = {};
+
   if (filterParams.location) params.location = filterParams.location;
   if (filterParams.form) params.form = filterParams.form;
   if (filterParams.AC) params.AC = filterParams.AC;
@@ -46,6 +49,9 @@ export const fetchFilteredCampers = createAsyncThunk<
   if (filterParams.kitchen) params.kitchen = filterParams.kitchen;
   if (filterParams.TV) params.TV = filterParams.TV;
   if (filterParams.bathroom) params.bathroom = filterParams.bathroom;
+
+  if (filterParams.page) params.page = filterParams.page;
+  if (filterParams.limit) params.limit = filterParams.limit;
 
   try {
     const response = await axios.get(url, { params });

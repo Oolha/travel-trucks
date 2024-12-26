@@ -10,3 +10,6 @@ export const selectIsLoading = (state: RootState): boolean => {
 export const selectError = (state: RootState): string | null => {
   return state.campers.error;
 };
+export const selectPage = (state: RootState): number => {
+  return state.campers.page;
+};

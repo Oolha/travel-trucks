@@ -3,6 +3,8 @@ import EquipmentCard from "../EquipmentCard/EquipmentCard";
 import css from "./Filters.module.css";
 import { Icon } from "../Icon/Icon";
 import { notification } from "antd";
+import { fetchFilteredCampers } from "../../redux/trucks/operations";
+import { useAppDispatch } from "../../redux/hooks";
 
 interface FilterParams {
   location: string;
@@ -11,7 +13,7 @@ interface FilterParams {
   kitchen: boolean;
   TV: boolean;
   bathroom: boolean;
-  vehicleType: string;
+  form: string;
 }
 const equipmentOptions = [
   { id: "AC", label: "AC" },
@@ -43,37 +45,37 @@ const Filters: React.FC<FiltersProps> = ({ onSearch }) => {
     setSelectedVehicleType((prev) => (prev === id ? "" : id));
   };
   const handleSearch = () => {
-    const filters: FilterParams = {
-      location,
+    const filters = {
+      location: location.trim(),
       AC: selectedFilters.includes("AC"),
       transmission: selectedFilters.includes("automatic") ? "automatic" : "",
       kitchen: selectedFilters.includes("kitchen"),
       TV: selectedFilters.includes("TV"),
       bathroom: selectedFilters.includes("bathroom"),
-      vehicleType: selectedVehicleType,
+      form: selectedVehicleType,
     };
+
     const hasFiltersApplied =
-      location ||
+      filters.location ||
       filters.AC ||
       filters.transmission ||
       filters.kitchen ||
       filters.TV ||
       filters.bathroom ||
-      filters.vehicleType;
+      filters.form;
 
     if (!hasFiltersApplied) {
       notification.warning({
-        message: "No Results Found",
-        description: "Please adjust your filters and try again.",
+        message: "No Filters Applied",
+        description: "Please select at least one filter and try again.",
         placement: "topRight",
       });
+      return;
     }
 
     onSearch(filters);
-    setSelectedFilters([]);
-    setSelectedVehicleType("");
-    setLocation("");
   };
+
   const iconColor = location ? "#101828" : "#6c717b";
 
   return (

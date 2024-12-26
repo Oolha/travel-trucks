@@ -16,7 +16,4 @@ export const campervanFormSchema = Joi.object({
   date: Joi.date().required().messages({
     "date.base": "Booking date is required",
   }),
-  comment: Joi.string().max(300).messages({
-    "string.max": "Comment must be less than 300 characters",
-  }),
 });
